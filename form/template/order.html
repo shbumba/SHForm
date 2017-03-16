@@ -1,0 +1,56 @@
+
+    <div id="order" class="modal modal--order mfp-hide">
+
+        <div class="modal__title modal__title-form">Купить баню-бочку</div>
+        
+        
+        <form class="modal__form sendForm" action="/form/order.php" method="post">
+            <input type="hidden" name="ajax" value="true" />
+            <input id='typeFormItem' type="hidden" name="orderForm[item]" value="<?= $template['$itemID'] ?>">
+            <div class="form__title">Выберите тип бани-бочки</div>
+            <div class="content__row">
+                <?
+                $equal = ceil(count($template['$dataForm']['tip-bani']) / 2);
+                $i = 0
+                ?>
+                <div class="content__item content__item--2">
+                <? foreach($template['$dataForm']['tip-bani'] as $key => $val): ?>
+                    <input name="orderForm[tip-bani]" class="form__check" id="tip-bani_<?= $key ?>" type="radio" value="<?= $key ?>"<?= isset($template['$dataFormSet']['tip-bani']) && in_array($key, $template['$dataFormSet']['tip-bani']) ? ' checked' : '' ?>>
+                    <label class="form__label" for="tip-bani_<?= $key ?>"><?= $val ?></label>
+                    <? if ((++$i % $equal) == 0): ?>
+                </div>
+                <div class="content__item content__item--2">
+                    <? else: ?>
+                    </br>
+                    <? endif; ?>
+                <? endforeach; unset($equal, $i)?>
+                </div>
+
+            </div>
+
+            <div class="form__title">Выберите вид бани-бочки</div>
+            <?
+            $count = count($template['$dataForm']['vid-bani']);
+            $i = 0;
+            ?>
+            <? foreach($template['$dataForm']['vid-bani'] as $key => $val): ?>
+            <input name='orderForm[vid-bani]' class="form__check" id="vid-bani_<?= $key ?>" type="radio" value="<?= $key ?>"<?= isset($template['$dataFormSet']['vid-bani']) && in_array($key, $template['$dataFormSet']['vid-bani']) ? ' checked' : '' ?>>
+            <label class="form__label" for="vid-bani_<?= $key ?>"><?= $val ?></label><?= ($i++ < $count) ? '</br>' : ''?>
+            <? endforeach; ?>
+
+            <div class="form__title">Введите свои данные</div>
+            <label class="form__label">
+                <input type="text" name="orderForm[name]" id="name" value="<?= $template['$sendName'] ?>" class="form__input req" placeholder="Ваше имя">
+                <i>*</i>
+            </label>
+            <label class="form__label">
+                <input type="text" name="orderForm[phone]" id="phone" value="<?= $template['$sendPhone'] ?>" class="form__input req" placeholder="Телефон">
+                <i>*</i>
+            </label>
+            <label class="form__label">
+                <input type="text" name="orderForm[email]" id="email" value="<?= $template['$sendEmail'] ?>" class="form__input" placeholder="E-mail">
+            </label>
+            <div class="text-center"><button class="btn btn--grey">отправить</button></div>
+        </form>
+        
+    </div>
