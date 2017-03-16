@@ -1,0 +1,19 @@
+<div id="order" class="modal modal--order mfp-hide">
+    <div class="modal__title modal__title-form">Обратный звонок</div>
+
+    <form class="modal__form sendForm" action="/form/order.php" method="post">
+        <input type="hidden" name="ajax" value="true" />
+
+        <div class="form__title">Введите свои данные</div>
+        <label class="form__label">
+            <input type="text" name="orderForm[name]" id="name" value="<?= $template['$sendName'] ?>" class="form__input req" placeholder="Ваше имя">
+            <i>*</i>
+        </label>
+        <label class="form__label">
+            <input type="text" name="orderForm[phone]" id="phone" value="<?= $template['$sendPhone'] ?>" class="form__input req" placeholder="Телефон">
+            <i>*</i>
+        </label>
+
+        <div class="text-center"><button class="btn btn--grey">отправить</button></div>
+    </form>
+</div>

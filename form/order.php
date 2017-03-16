@@ -14,9 +14,6 @@ if ($isAjax) {
     header(sprintf('HTTP/%s %s %s', '1.0', 200, 'OK'), true, 200);
 }
 
-//
-//->Form
-//
 $sendName = $sendPhone = $sendEmail = $sendItem = '';
 
 $itemID = 0;
@@ -41,7 +38,7 @@ if (PrepareInput::has('item-id')) {
 }
 
 if (PrepareInput::has('orderForm')) {
-    $mailTitle = 'Заполнена форма на сайте "Баня Бочка"';
+    $mailTitle = 'Заполнена форма';
 
     $sendName = PrepareInput::prepare('orderForm.name');
     $sendPhone = PrepareInput::prepare('orderForm.phone');
@@ -132,15 +129,10 @@ if (PrepareInput::has('orderForm')) {
     }
 }
 
-//
-//<-Form
-//
-
 if ($isAjax) {
     echo json_encode(array(
         'error' => $errorOrderText,
-        'success' => $successText,
-        'option' => Option::get('mail')
+        'success' => $successText
     ), JSON_UNESCAPED_UNICODE);
 } else {
     $template = array(
